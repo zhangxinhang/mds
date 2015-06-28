@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 import et.mds.vo.ReleaseVO;
 
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 
 /**
  * 发布量核心算法。
@@ -59,7 +58,11 @@ public class HandelReleaseChange {
 			}
 		} else {
 			if (isNoKeyToAdd) {
-				jedis.set(key, count + "");
+				if(isAdd){//对于新增key值的正负值判断。
+					jedis.set(key, df.format(count));
+				}else{
+					jedis.set(key, df.format(0-count));
+				}
 			} else {
 				flag = false;
 			}
@@ -166,6 +169,7 @@ public class HandelReleaseChange {
 	 * 
 	 * 
 	 * */
+	@SuppressWarnings("unused")
 	private static boolean removeKey(String key) {
 		Jedis jedis = JedisPools.getInstance().getResource();
 		Boolean flag = jedis.del(key) != null;
