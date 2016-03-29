@@ -7,6 +7,6 @@ instance:expire(incrkey,1);
 instance:incr(incrkey);
 local billcode = instance:get(incrkey);
 
-instance:close();
+bcpUtil.close(instance);
 --生成单据号 e.g 2014122018200801
 ngx.say(os.date("%Y%m%d%H%M%S")..string.format("%02d",billcode));

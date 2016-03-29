@@ -20,6 +20,6 @@ for i=1,#pros do
   end
   tab[key_args]=bcpUtil.format_value(key_value)
 end
-instance:close()
+bcpUtil.close(instance);
 ngx.say(json.encode(tab))
 

@@ -29,5 +29,5 @@ for i=1,#formulas do
 	retVals[formula_name] = valueObj
 end
 
-instance:close()
+bcpUtil.close(instance);
 ngx.say(json.encode(retVals))

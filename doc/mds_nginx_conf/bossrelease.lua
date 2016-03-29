@@ -30,5 +30,5 @@ for i=1,#pros do
 	end
 	retVals[key_args] = bcpUtil.format_value(string.format("%.4f",value))
 end
-instance:close()
+bcpUtil.close(instance);
 ngx.say(json.encode(retVals))
